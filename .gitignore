@@ -1,0 +1,18 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Database
+promptshield.db
+*.db
+
+# Next.js
+dashboard/.next/
+dashboard/node_modules/
+
+# macOS
+.DS_Store
