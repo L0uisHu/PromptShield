@@ -47,10 +47,15 @@ graph LR
     B --> F[(SQLite Log)]
 ```
 
+## Live demo
+
+- **Proxy**: https://promptshield-production-8633.up.railway.app
+- **Dashboard**: https://prompt-shield-chi.vercel.app
+
 ## Dashboard
 
-Every request gets logged — blocked or clean. The Next.js dashboard shows 
-live stats, detection method per request (keyword / embedding / unicode / 
+Every request gets logged — blocked or clean. The Next.js dashboard shows
+live stats, detection method per request (keyword / embedding / unicode /
 base64), similarity scores, and latency. Auto-refreshes every 5 seconds.
 
 ## Quick start
