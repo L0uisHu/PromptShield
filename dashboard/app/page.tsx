@@ -131,6 +131,8 @@ export default function Dashboard() {
   const [stats, setStats] = useState<Stats | null>(null)
   const [logs, setLogs] = useState<LogEntry[]>([])
   const [selected, setSelected] = useState<LogEntry | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
 
   const refresh = useCallback(async () => {
     try {
@@ -140,7 +142,11 @@ export default function Dashboard() {
       ])
       setStats(s)
       setLogs(l.results ?? [])
-    } catch {
+      setError(null)
+      setLastUpdated(new Date())
+    } catch (err) {
+      console.error('Failed to refresh dashboard data', err)
+      setError('Unable to reach backend API. Check NEXT_PUBLIC_API_URL and backend CORS/health.')
       // keep showing stale data if server is temporarily unreachable
     }
   }, [])
@@ -183,7 +189,18 @@ export default function Dashboard() {
         {/* Log table */}
         <div className="rounded-xl border border-white/10 overflow-hidden">
           <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
-            <span className="text-sm font-medium text-zinc-300">Recent Requests</span>
+            <div className="flex flex-col">
+              <span className="text-sm font-medium text-zinc-300">Recent Requests</span>
+              {error ? (
+                <span className="text-xs text-red-400">{error}</span>
+              ) : (
+                <span className="text-xs text-emerald-400">
+                  {lastUpdated
+                    ? `Connected · updated ${lastUpdated.toLocaleTimeString()}`
+                    : 'Connecting...'}
+                </span>
+              )}
+            </div>
             <span className="text-xs text-zinc-600">auto-refreshes every 5s</span>
           </div>
           <table className="w-full text-sm">
