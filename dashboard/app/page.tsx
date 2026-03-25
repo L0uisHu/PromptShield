@@ -26,10 +26,17 @@ type LogEntry = {
 function methodStyle(method: string): string {
   if (method.startsWith('base64_')) return 'bg-pink-500/15 text-pink-400'
   if (method.startsWith('unicode_')) return 'bg-cyan-500/15 text-cyan-400'
+  if (method.startsWith('alt_encoding_')) return 'bg-teal-500/15 text-teal-400'
   const MAP: Record<string, string> = {
-    keyword: 'bg-orange-500/15 text-orange-400',
-    embedding_similarity: 'bg-purple-500/15 text-purple-400',
-    length_heuristic: 'bg-yellow-500/15 text-yellow-400',
+    keyword:             'bg-orange-500/15 text-orange-400',
+    embedding_similarity:'bg-purple-500/15 text-purple-400',
+    length_heuristic:    'bg-yellow-500/15 text-yellow-400',
+    invisible_char:      'bg-rose-500/15 text-rose-400',
+    prompt_delimiter:    'bg-red-500/15 text-red-400',
+    fuzzy_keyword:       'bg-amber-500/15 text-amber-400',
+    exfiltration:        'bg-violet-500/15 text-violet-400',
+    instruction_density: 'bg-lime-500/15 text-lime-400',
+    repetition_flood:    'bg-sky-500/15 text-sky-400',
   }
   return MAP[method] ?? 'bg-zinc-500/15 text-zinc-400'
 }
